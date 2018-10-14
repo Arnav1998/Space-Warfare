@@ -9,7 +9,7 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene, SKPhysicsContactDelegate {
+class GameScene: SKScene {
     
     var backgroundStarField: SKEmitterNode! = nil
     var player: SKSpriteNode! = nil
@@ -122,7 +122,73 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        fireTorpedo()
+    }
+    
+    private func fireTorpedo() {
+        
+        self.run(SKAction.playSoundFileNamed("torpedo.mp3", waitForCompletion: false))
+        
+        let torpedo = SKSpriteNode(imageNamed: "torpedo")
+        
+        torpedo.position = CGPoint(x: player.position.x, y: player.position.y+player.size.height/2)
+        
+        torpedo.physicsBody = SKPhysicsBody(circleOfRadius: torpedo.size.width/2)
+        
+        torpedo.physicsBody?.isDynamic = true
+        
+        torpedo.physicsBody?.categoryBitMask = photonTorpedoCollisionCategory
+        
+        torpedo.physicsBody?.contactTestBitMask = alienCollisionCategory
+        
+        torpedo.physicsBody?.collisionBitMask = 0
+        
+        torpedo.physicsBody?.usesPreciseCollisionDetection = true
+        
+        self.addChild(torpedo)
+        
+        var actionArray = [SKAction]()
+        
+        let animationDuration:TimeInterval = 0.5
+        
+        actionArray.append(SKAction.move(to: CGPoint(x: player.position.x, y: self.frame.maxY+torpedo.size.height), duration: animationDuration))
+        
+        actionArray.append(SKAction.removeFromParent())
+        
+        torpedo.run(SKAction.sequence(actionArray))
+        
+    }
+    
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
     }
+}
+
+extension GameScene: SKPhysicsContactDelegate {
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        
+        let explosion = SKEmitterNode(fileNamed: "Explosion")
+        
+        explosion?.position = (contact.bodyA.node?.position)!
+        
+        self.addChild(explosion!)
+        
+        self.run(SKAction.playSoundFileNamed("explosion.mp3", waitForCompletion: false))
+        
+        contact.bodyA.node?.removeFromParent()
+        
+        contact.bodyB.node?.removeFromParent()
+        
+        self.run(SKAction.wait(forDuration: 2)) {
+            
+            explosion?.removeFromParent()
+            
+        }
+        
+        score += 5 
+        
+    }
+    
 }
