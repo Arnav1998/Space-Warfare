@@ -48,11 +48,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let randomPosition = GKRandomDistribution(lowestValue: Int(self.frame.minX + alien.size.width), highestValue: Int(self.frame.maxX - alien.size.width))
         
-        alien.position = CGPoint(x: CGFloat(randomPosition.nextInt()), y: self.frame.maxY - 4*alien.size.height)
+        alien.position = CGPoint(x: CGFloat(randomPosition.nextInt()), y: self.frame.maxY)
         
         alien.physicsBody = SKPhysicsBody(rectangleOf: alien.size)
         
+        //alien.physicsBody?.velocity = CGVector(dx: 0.0, dy: 4.0)
+        
         alien.physicsBody?.isDynamic = true
+        
+       // alien.physicsBody?.velocity = CGVector(dx: 0.0, dy: -3.0)
+        
+        alien.physicsBody?.linearDamping = 3.0
         
         self.addChild(alien)
     }
@@ -77,7 +83,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.physicsWorld.contactDelegate = self
         
-        //self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
+        //self.physicsWorld.gravity = CGVector(dx: 0.0, dy: 0.0)
     }
     
     private func setupBackgroundEmitter() {
