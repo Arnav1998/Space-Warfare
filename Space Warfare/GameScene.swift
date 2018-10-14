@@ -8,6 +8,7 @@
 
 import SpriteKit
 import GameplayKit
+import CoreMotion
 
 class GameScene: SKScene {
     
@@ -23,7 +24,8 @@ class GameScene: SKScene {
     var aliens = ["alien","alien2","alien3"]
     let alienCollisionCategory:UInt32 = 0x1 << 1
     let photonTorpedoCollisionCategory:UInt32 = 0x1 << 0
-    
+    let motionManager = CMMotionManager()
+    var xAcceleration:CGFloat = 0
 
     override func didMove(to view: SKView) {
 
@@ -36,6 +38,25 @@ class GameScene: SKScene {
         setupScoreLabel()
         
         setupTimer()
+        
+        setupMotionManager()
+    }
+    
+    private func setupMotionManager() {
+    
+        motionManager.accelerometerUpdateInterval = 0.2
+        
+        motionManager.startAccelerometerUpdates(to: OperationQueue.current!) { (data, error) in
+            
+            if let accelerationData = data {
+                
+                let acceleration = accelerationData.acceleration
+                
+                self.xAcceleration = CGFloat(acceleration.x) * 0.75 + self.xAcceleration * 0.25
+            }
+            
+        }
+        
     }
     
     private func setupTimer() {
@@ -81,7 +102,7 @@ class GameScene: SKScene {
         
         score = 0
         
-        scoreLabel.position = CGPoint(x: self.frame.minX + scoreLabel.frame.size.width + 35, y: self.frame.maxY - 3*scoreLabel.frame.size.height)
+        scoreLabel.position = CGPoint(x: self.frame.minX + scoreLabel.frame.size.width + 45, y: self.frame.maxY - 3*scoreLabel.frame.size.height)
         
         scoreLabel.fontName = "AmericanTypewriter-Bold"
         
@@ -189,6 +210,17 @@ extension GameScene: SKPhysicsContactDelegate {
         
         score += 5 
         
+    }
+    
+    override func didSimulatePhysics() {
+        
+        player.position.x += xAcceleration * 50
+        
+        if (player.position.x > self.frame.maxX) {
+            player.position.x = self.frame.minX
+        } else if (player.position.x < self.frame.minX){
+            player.position.x = self.frame.maxX
+        }
     }
     
 }
