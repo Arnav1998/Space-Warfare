@@ -9,7 +9,7 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var backgroundStarField: SKEmitterNode! = nil
     var player: SKSpriteNode! = nil
@@ -25,6 +25,33 @@ class GameScene: SKScene {
         setupBackgroundEmitter()
         
         addPlayer()
+        
+        setupPhysicsWorld()
+        
+        setupScoreLabel()
+    }
+    
+    private func setupScoreLabel() {
+        
+        scoreLabel = SKLabelNode(text: "Score: 0")
+        
+        score = 0
+        
+        scoreLabel.position = CGPoint(x: self.frame.minX + scoreLabel.frame.size.width + 35, y: self.frame.maxY - 3*scoreLabel.frame.size.height)
+        
+        scoreLabel.fontName = "AmericanTypewriter-Bold"
+        
+        scoreLabel.fontSize = 36
+        
+        self.addChild(scoreLabel)
+        
+    }
+    
+    private func setupPhysicsWorld() {
+        
+        self.physicsWorld.contactDelegate = self
+        
+        self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
     }
     
     private func setupBackgroundEmitter() {
