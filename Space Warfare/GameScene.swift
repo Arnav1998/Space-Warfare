@@ -19,6 +19,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     var scoreLabel: SKLabelNode! = nil
+    var timer: Timer! = nil
+    var aliens = ["alien","alien2","alien3"]
+    
 
     override func didMove(to view: SKView) {
 
@@ -29,6 +32,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setupPhysicsWorld()
         
         setupScoreLabel()
+        
+        setupTimer()
+    }
+    
+    private func setupTimer() {
+    
+        timer = Timer.scheduledTimer(timeInterval: 0.75, target: self, selector: #selector(addAliens), userInfo: nil, repeats: true)
+        
+    }
+    
+    @objc private func addAliens() {
+        
+        let alien = SKSpriteNode(imageNamed: aliens[Int(arc4random_uniform(UInt32(aliens.count)))])
+        
+        let randomPosition = GKRandomDistribution(lowestValue: Int(self.frame.minX + alien.size.width), highestValue: Int(self.frame.maxX - alien.size.width))
+        
+        alien.position = CGPoint(x: CGFloat(randomPosition.nextInt()), y: self.frame.maxY - 4*alien.size.height)
+        
+        alien.physicsBody = SKPhysicsBody(rectangleOf: alien.size)
+        
+        alien.physicsBody?.isDynamic = true
+        
+        self.addChild(alien)
     }
     
     private func setupScoreLabel() {
@@ -51,7 +77,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.physicsWorld.contactDelegate = self
         
-        self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
+        //self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
     }
     
     private func setupBackgroundEmitter() {
