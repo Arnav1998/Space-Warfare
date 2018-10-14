@@ -21,6 +21,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var scoreLabel: SKLabelNode! = nil
     var timer: Timer! = nil
     var aliens = ["alien","alien2","alien3"]
+    let alienCollisionCategory:UInt32 = 0x1 << 1
+    let photonTorpedoCollisionCategory:UInt32 = 0x1 << 0
     
 
     override func didMove(to view: SKView) {
@@ -52,15 +54,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         alien.physicsBody = SKPhysicsBody(rectangleOf: alien.size)
         
-        //alien.physicsBody?.velocity = CGVector(dx: 0.0, dy: 4.0)
-        
         alien.physicsBody?.isDynamic = true
         
-       // alien.physicsBody?.velocity = CGVector(dx: 0.0, dy: -3.0)
+        alien.physicsBody?.categoryBitMask = alienCollisionCategory
         
-        alien.physicsBody?.linearDamping = 3.0
+        alien.physicsBody?.contactTestBitMask = photonTorpedoCollisionCategory
+        
+        alien.physicsBody?.collisionBitMask = 0
         
         self.addChild(alien)
+        
+        var actionArray = [SKAction]()
+        
+        let animationDuration:TimeInterval = 6
+    
+        actionArray.append(SKAction.move(to: CGPoint(x: alien.position.x, y: self.frame.minY-alien.size.height), duration: animationDuration))
+        
+        actionArray.append(SKAction.removeFromParent())
+        
+        alien.run(SKAction.sequence(actionArray))
     }
     
     private func setupScoreLabel() {
@@ -83,7 +95,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.physicsWorld.contactDelegate = self
         
-        //self.physicsWorld.gravity = CGVector(dx: 0.0, dy: 0.0)
+        self.physicsWorld.gravity = CGVector(dx: 0.0, dy: 0.0)
     }
     
     private func setupBackgroundEmitter() {
