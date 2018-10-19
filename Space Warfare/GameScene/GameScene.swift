@@ -12,15 +12,15 @@ import CoreMotion
 
 class GameScene: SKScene {
     
-    var backgroundStarField: SKEmitterNode! = nil
-    var player: SKSpriteNode! = nil
+    var backgroundStarField: SKEmitterNode!
+    var player: SKSpriteNode!
     var score = 0 {
         didSet {
             self.scoreLabel.text = "Score: \(score)"
         }
     }
-    var scoreLabel: SKLabelNode! = nil
-    var timer: Timer! = nil
+    var scoreLabel: SKLabelNode!
+    var timer: Timer!
     var aliens = ["alien","alien2","alien3"]
     let alienCollisionCategory:UInt32 = 0x1 << 1
     let photonTorpedoCollisionCategory:UInt32 = 0x1 << 0

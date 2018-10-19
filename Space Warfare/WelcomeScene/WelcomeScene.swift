@@ -10,10 +10,10 @@ import SpriteKit
 
 class WelcomeScene: SKScene {
     
-    var startGameLabel: SKLabelNode! = nil
-    var instructionsLabel: SKLabelNode! = nil
-    var highscoreLabel: SKLabelNode! = nil
-    var emitter: SKEmitterNode! = nil
+    var startGameLabel: SKLabelNode! 
+    var instructionsLabel: SKLabelNode!
+    var highscoreLabel: SKLabelNode!
+    var emitter: SKEmitterNode!
     
     override func didMove(to view: SKView) {
         
