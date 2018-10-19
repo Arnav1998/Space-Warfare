@@ -26,10 +26,13 @@ class GameScene: SKScene {
     let photonTorpedoCollisionCategory:UInt32 = 0x1 << 0
     let motionManager = CMMotionManager()
     var xAcceleration:CGFloat = 0
+    var lives: [SKSpriteNode]!
 
     override func didMove(to view: SKView) {
 
         setupBackgroundEmitter()
+        
+        addLives()
         
         addPlayer()
         
@@ -40,6 +43,22 @@ class GameScene: SKScene {
         setupTimer()
         
         setupMotionManager()
+    }
+    
+    private func addLives() {
+        
+        lives = [SKSpriteNode]()
+        
+        for i in 1...3 {
+            
+            let liveNode = SKSpriteNode(imageNamed: "player")
+            liveNode.position = CGPoint(x: self.frame.width/2 - CGFloat(5-i)*liveNode.size.width, y: self.frame.maxY - 60.0)
+            self.addChild(liveNode)
+            lives.append(liveNode)
+            
+        }
+        
+        print(lives.count)
     }
     
     private func setupMotionManager() {
@@ -102,7 +121,7 @@ class GameScene: SKScene {
         
         score = 0
         
-        scoreLabel.position = CGPoint(x: self.frame.minX + scoreLabel.frame.size.width + 45, y: self.frame.maxY - 3*scoreLabel.frame.size.height)
+        scoreLabel.position = CGPoint(x: self.frame.minX + scoreLabel.frame.size.width + 55, y: self.frame.maxY - 3*scoreLabel.frame.size.height)
         
         scoreLabel.fontName = "AmericanTypewriter-Bold"
         
@@ -180,10 +199,7 @@ class GameScene: SKScene {
         torpedo.run(SKAction.sequence(actionArray))
         
     }
-    
-    override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
-    }
+
 }
 
 extension GameScene: SKPhysicsContactDelegate {
