@@ -23,6 +23,7 @@
 		4777FC352172D5890029B8A9 /* Explosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 4777FC332172D5880029B8A9 /* Explosion.sks */; };
 		4777FC362172D5890029B8A9 /* Starfield.sks in Resources */ = {isa = PBXBuildFile; fileRef = 4777FC342172D5880029B8A9 /* Starfield.sks */; };
 		478737D92173293C0008FAF2 /* WelcomeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478737D82173293C0008FAF2 /* WelcomeScene.swift */; };
+		478AF004217BE6490027CA9C /* backgroundMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 478AF003217BE6490027CA9C /* backgroundMusic.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		4777FC332172D5880029B8A9 /* Explosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Explosion.sks; sourceTree = "<group>"; };
 		4777FC342172D5880029B8A9 /* Starfield.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Starfield.sks; sourceTree = "<group>"; };
 		478737D82173293C0008FAF2 /* WelcomeScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScene.swift; sourceTree = "<group>"; };
+		478AF003217BE6490027CA9C /* backgroundMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = backgroundMusic.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 		47458FA8217321DE00B3E82F /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				478AF003217BE6490027CA9C /* backgroundMusic.mp3 */,
 				4777FC2D2172D46F0029B8A9 /* explosion.mp3 */,
 				4777FC2E2172D46F0029B8A9 /* torpedo.mp3 */,
 			);
@@ -96,8 +99,8 @@
 		4777AC942179A27400040505 /* gameOverScene */ = {
 			isa = PBXGroup;
 			children = (
-				4777AC922179A22500040505 /* gameOverScene.swift */,
 				4777AC902179A1F000040505 /* gameOverScene.sks */,
+				4777AC922179A22500040505 /* gameOverScene.swift */,
 			);
 			path = gameOverScene;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 			files = (
 				4777FC302172D46F0029B8A9 /* torpedo.mp3 in Resources */,
 				4777AC912179A1F000040505 /* gameOverScene.sks in Resources */,
+				478AF004217BE6490027CA9C /* backgroundMusic.mp3 in Resources */,
 				4777FC2F2172D46F0029B8A9 /* explosion.mp3 in Resources */,
 				4777FC212172D3680029B8A9 /* Main.storyboard in Resources */,
 				4777FC182172D3680029B8A9 /* GameScene.sks in Resources */,

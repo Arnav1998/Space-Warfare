@@ -28,9 +28,22 @@ class WelcomeScene: SKScene {
         startGameLabel = (self.childNode(withName: "startGame") as! SKLabelNode)
         instructionsLabel = (self.childNode(withName: "instructions") as! SKLabelNode)
         highscoreLabel = (self.childNode(withName: "highscore") as! SKLabelNode)
+        
+//        updateHighscore()
+        
         emitter = (self.childNode(withName: "emitter") as! SKEmitterNode)
         
     }
+    
+//    private func updateHighscore() {
+//
+//
+//        let highScore = UserDefaults.value(forKey: "highScore")
+//        if let score = highScore {
+//            self.highscoreLabel.text = "High Score: \(score)"
+//        }
+//
+//    }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         

@@ -27,8 +27,11 @@ class GameScene: SKScene {
     let motionManager = CMMotionManager()
     var xAcceleration:CGFloat = 0
     var lives: [SKSpriteNode]!
+//    var backgroundMusicAction = SKAction.repeatForever(SKAction.playSoundFileNamed("backgroundMusic.mp3", waitForCompletion: true))
 
     override func didMove(to view: SKView) {
+        
+//        playBackgroundMusic()
 
         setupBackgroundEmitter()
         
@@ -45,6 +48,12 @@ class GameScene: SKScene {
         setupMotionManager()
     }
     
+//    private func playBackgroundMusic() {
+//
+//        self.run(backgroundMusicAction)
+//
+//    }
+    
     private func addLives() {
         
         lives = [SKSpriteNode]()
@@ -57,8 +66,7 @@ class GameScene: SKScene {
             lives.append(liveNode)
             
         }
-        
-        print(lives.count)
+
     }
     
     private func setupMotionManager() {
@@ -109,6 +117,27 @@ class GameScene: SKScene {
         let animationDuration:TimeInterval = 6
     
         actionArray.append(SKAction.move(to: CGPoint(x: alien.position.x, y: self.frame.minY-alien.size.height), duration: animationDuration))
+        
+        actionArray.append(SKAction.run {
+            
+            if (self.lives.count > 0) {
+                
+                let liveNode = self.lives.first
+                liveNode!.removeFromParent()
+                
+                self.lives.removeFirst()
+                
+                if (self.lives.count == 0) {
+                    
+                    let gameOverScene = SKScene(fileNamed: "gameOverScene") as! gameOverScene
+                    self.view?.presentScene(gameOverScene, transition: SKTransition.flipHorizontal(withDuration: 0.5))
+                    gameOverScene.scoreLabel.text = "Score: \(self.score)"
+                    
+                }
+                
+            }
+            
+        })
         
         actionArray.append(SKAction.removeFromParent())
         
