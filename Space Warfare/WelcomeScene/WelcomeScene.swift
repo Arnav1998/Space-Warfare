@@ -57,6 +57,10 @@ class WelcomeScene: SKScene {
                 let gameScene = SKScene(fileNamed: "GameScene")!
                 gameScene.scaleMode = .aspectFill
                 self.view?.presentScene(gameScene, transition: SKTransition.flipHorizontal(withDuration: 0.5))
+            } else if (nodesArray.first?.name == "instructions") {
+                let instructionScene = SKScene(fileNamed: "InstructionScene")!
+                instructionScene.scaleMode = .aspectFill
+                self.view?.presentScene(instructionScene, transition: SKTransition.flipHorizontal(withDuration: 0.5))
             }
 
         }
