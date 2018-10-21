@@ -24,6 +24,7 @@
 		4777FC362172D5890029B8A9 /* Starfield.sks in Resources */ = {isa = PBXBuildFile; fileRef = 4777FC342172D5880029B8A9 /* Starfield.sks */; };
 		478737D92173293C0008FAF2 /* WelcomeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478737D82173293C0008FAF2 /* WelcomeScene.swift */; };
 		478AF004217BE6490027CA9C /* backgroundMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 478AF003217BE6490027CA9C /* backgroundMusic.mp3 */; };
+		47977D5A217BFC6F0059AFA0 /* alienDrop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 47977D59217BFC6F0059AFA0 /* alienDrop.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		4777FC342172D5880029B8A9 /* Starfield.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Starfield.sks; sourceTree = "<group>"; };
 		478737D82173293C0008FAF2 /* WelcomeScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeScene.swift; sourceTree = "<group>"; };
 		478AF003217BE6490027CA9C /* backgroundMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = backgroundMusic.mp3; sourceTree = "<group>"; };
+		47977D59217BFC6F0059AFA0 /* alienDrop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = alienDrop.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +73,7 @@
 		47458FA8217321DE00B3E82F /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				47977D59217BFC6F0059AFA0 /* alienDrop.mp3 */,
 				478AF003217BE6490027CA9C /* backgroundMusic.mp3 */,
 				4777FC2D2172D46F0029B8A9 /* explosion.mp3 */,
 				4777FC2E2172D46F0029B8A9 /* torpedo.mp3 */,
@@ -199,6 +202,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4777FC302172D46F0029B8A9 /* torpedo.mp3 in Resources */,
+				47977D5A217BFC6F0059AFA0 /* alienDrop.mp3 in Resources */,
 				4777AC912179A1F000040505 /* gameOverScene.sks in Resources */,
 				478AF004217BE6490027CA9C /* backgroundMusic.mp3 in Resources */,
 				4777FC2F2172D46F0029B8A9 /* explosion.mp3 in Resources */,

@@ -118,6 +118,8 @@ class GameScene: SKScene {
     
         actionArray.append(SKAction.move(to: CGPoint(x: alien.position.x, y: self.frame.minY-alien.size.height), duration: animationDuration))
         
+        actionArray.append(SKAction.playSoundFileNamed("alienDrop.mp3", waitForCompletion: false))
+        
         actionArray.append(SKAction.run {
             
             if (self.lives.count > 0) {
@@ -128,6 +130,16 @@ class GameScene: SKScene {
                 self.lives.removeFirst()
                 
                 if (self.lives.count == 0) {
+                    
+                    if let highScore = UserDefaults.standard.value(forKey: "highScore") as? Int {
+                        
+                        if (self.score > highScore) {
+                            UserDefaults.standard.setValue(self.score, forKey: "highScore")
+                        }
+                        
+                    } else {
+                        UserDefaults.standard.setValue(self.score, forKey: "highScore")
+                    }
                     
                     let gameOverScene = SKScene(fileNamed: "gameOverScene") as! gameOverScene
                     self.view?.presentScene(gameOverScene, transition: SKTransition.flipHorizontal(withDuration: 0.5))
